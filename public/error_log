@@ -1,0 +1,12 @@
+[28-May-2019 13:40:02 Asia/Tehran] PHP Parse error:  syntax error, unexpected T_CLASS, expecting T_STRING or T_VARIABLE or '$' in /home/examerdo/public_html/index.php on line 52
+[28-May-2019 13:41:08 Asia/Tehran] PHP Parse error:  syntax error, unexpected T_CLASS, expecting T_STRING or T_VARIABLE or '$' in /home/examerdo/public_html/index.php on line 52
+[28-May-2019 13:41:09 Asia/Tehran] PHP Parse error:  syntax error, unexpected T_CLASS, expecting T_STRING or T_VARIABLE or '$' in /home/examerdo/public_html/index.php on line 52
+[28-May-2019 13:41:10 Asia/Tehran] PHP Parse error:  syntax error, unexpected T_CLASS, expecting T_STRING or T_VARIABLE or '$' in /home/examerdo/public_html/index.php on line 52
+[28-May-2019 13:41:12 Asia/Tehran] PHP Parse error:  syntax error, unexpected T_CLASS, expecting T_STRING or T_VARIABLE or '$' in /home/examerdo/public_html/index.php on line 52
+[28-May-2019 13:41:27 Asia/Tehran] PHP Warning:  require(/home/examerdo/public_html/../vendor/autoload.php): failed to open stream: No such file or directory in /home/examerdo/public_html/index.php on line 24
+[28-May-2019 13:41:27 Asia/Tehran] PHP Warning:  require(/home/examerdo/public_html/../vendor/autoload.php): failed to open stream: No such file or directory in /home/examerdo/public_html/index.php on line 24
+[28-May-2019 13:41:27 Asia/Tehran] PHP Fatal error:  require(): Failed opening required '/home/examerdo/public_html/../vendor/autoload.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/examerdo/public_html/index.php on line 24
+[03-Jun-2019 21:05:50 UTC] PHP Fatal error:  Maximum execution time of 60 seconds exceeded in /home/examerdo/laravel/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Concerns/HasAttributes.php on line 537
+[03-Jun-2019 21:52:54 UTC] PHP Fatal error:  Cannot use [] for unsetting in /home/examerdo/laravel/app/Http/Controllers/AnswerController.php on line 129
+[24-Jun-2019 16:04:19 UTC] PHP Fatal error:  Cannot use App\User as User because the name is already in use in /home/examerdo/laravel/app/Http/Controllers/UserController.php on line 10
+[24-Jun-2019 17:18:10 UTC] PHP Fatal error:  Cannot use [] for reading in /home/examerdo/laravel/app/Http/Controllers/UserController.php on line 123

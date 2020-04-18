@@ -1,0 +1,26 @@
+.userpaneloption {
+  margin-top:4rem;
+	  border: 3px solid rgb(29, 161, 242,.7);
+	   box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.2), 0 5px 20px 0 rgba(0, 0, 0, 0.19); 
+	   border-radius: 10px;
+	  height: 20rem;
+	  margin-bottom: 2rem;
+	  margin-left: 1rem;
+	  text-align: center;
+
+}
+.userpaneloption:hover {
+	box-shadow: 5px 5px 30px 5px rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19); 
+}
+.image
+{
+     margin-top: 20px;
+	height: 10rem;
+	width: 15rem;
+}
+.desc {
+	color: #4b525e;
+	
+	margin-top: 3rem;
+
+}

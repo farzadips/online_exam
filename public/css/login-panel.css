@@ -1,0 +1,51 @@
+#login-panel {
+	margin-top:5rem;
+	  
+
+	   box-shadow: 0 8px 15px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 
+	   border-radius: 1rem;
+	height: 40rem;	
+}
+
+#about-panel {
+	margin-top:5rem;
+	  border: 1px solid rgba(216, 86,86, .53);
+
+	   box-shadow: 0 8px 15px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 
+	   border-radius: 1rem;
+	  height: 30rem;
+	  margin-bottom: 2rem;
+	
+
+}
+.label{
+	color:#c93e3e;
+}
+#login-btn {
+border-radius: 10px;
+width: 40%;
+background-color: #1da1f2 ;
+border:1px solid white;
+color: white;
+padding: 1rem;
+}
+	#login-btn:hover
+{
+background-color: white;
+border:1px solid #1da1f2;
+color: #1da1f2;
+
+}
+#register-panel {
+		margin-top:5rem;
+	  
+
+	   box-shadow: 0 8px 15px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 
+	   border-radius: 1rem;
+	height: 50rem
+}
+@media only screen and (max-width:600px){
+i{
+	font-size: 10vw;
+}
+}

@@ -1,0 +1,27 @@
+.login-exam-btn{
+	border:2px solid #01a828;
+	border-radius: 5px;
+	padding: .5rem 2rem;
+	color:#01a828;
+	background-color: white;
+}
+.login-exam-btn:hover {
+	border:2px solid #ddddd9;
+	background-color:#01a828;
+	color: #ddddd9;
+}
+.future-exam-img{
+	width: 17rem;
+	height: 17rem;
+	margin-top: 1rem;
+}
+.future-exam-plain {
+	background-color: white;
+	text-align: center;
+	 width: 51rem;
+	 border:1px solid #d3d3d3;
+	 border-radius: 10px;
+	 margin: 1rem 1rem;
+	 box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 
+
+}

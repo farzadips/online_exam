@@ -1,0 +1,18 @@
+#admin-menu {
+	text-align: right;
+	border-left: 1px solid #e5e5e5;
+	position:fixed !important;
+    position:fixed;
+	top:0;
+	right:0;
+	bottom:0;
+}
+.border-bot{
+	border-bottom:1px solid #e5e5e5;
+}
+.w-200 {
+	width: 25rem;
+}
+.w-400{
+	width: 35rem;
+}
