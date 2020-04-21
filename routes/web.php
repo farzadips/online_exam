@@ -27,7 +27,9 @@ Route::get('/logout','LoginController@logout');
 
 Route::prefix('adminpanel')->group(function (){
     Route::get('/','AdminController@index');
+    Route::get('/add_exam','AdminController@add_exam');
     Route::resource('categories','CategoryController');
+    Route::post('/delete_exam/{id}','AdminController@delete_exam');
 });
 
 

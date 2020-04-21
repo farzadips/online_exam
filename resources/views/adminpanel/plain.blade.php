@@ -42,39 +42,41 @@
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div style="direction: rtl">
-		<div class="d-flex justify-content-start">
-	    	<div class="col-sm-2" id="admin-menu">
-	    		<ul class="nav flex-column mt-5">
-				    <li class="nav-item ">
-				      <a class="nav-link border-bot" href="/adminpanel">افزودن آزمون</a>
-				    </li>
-				    <hr>
-				    <li class="nav-item">
-				      <a class="nav-link border-bot" href="/news">ارسال اطلاعیه</a>
-				    </li>
-                    <hr>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('categories.index')}}">دسته بندی ها</a>
-                    </li>
-				    <hr>
-				    <li class="nav-item">
-				      <a class="nav-link" href="/logout">خروج</a>
-				    </li>
+    <div class="d-flex justify-content-start">
+        <div class="col-sm-2" id="admin-menu">
+            <ul class="nav flex-column mt-5">
+                <li class="nav-item " style="margin-top: 15mm">
+                    <span>آزمون ها</span>
+                    <a href="/exams"><i class="fa fa-circle-o"></i>لیست سوالات </a>
+                    <a href="/adminpanel/add_exam"><i class="fa fa-circle-o"></i>افزودن آزمون </a>
+                </li>
+                <hr>
+                <li class="nav-item">
+                    <a class="nav-link border-bot" href="/news">ارسال اطلاعیه</a>
+                </li>
+                <hr>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('categories.index')}}">دسته بندی ها</a>
+                </li>
+                <hr>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">خروج</a>
+                </li>
 
 
-				  </ul>
+            </ul>
 
 
-		   </div>
+        </div>
 
-	</div>
-	<div class="col-sm-9 ">
-			<div class="d-flex justify-content-end mt-5">
-	@yield('content')
-	 </div>
-	</div>
-	</div>
-	@yield('ajax')
+    </div>
+    <div class="col-sm-9 ">
+        <div class="d-flex justify-content-end mt-5">
+            @yield('content')
+        </div>
+    </div>
+</div>
+@yield('ajax')
 
 <!-- jQuery UI 1.11.4 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>

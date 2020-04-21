@@ -18,9 +18,12 @@ class CreateExamsTable extends Migration
             $table->string('exam_name',60)->nullable();;
             $table->integer('type_question')->nullable();;
             $table->integer('question_count')->nullable();
-//
-//            $table->unsignedBigInteger('category_id');
-//            $table->foreign('category_id')->references('id')->on('categories');
+
+            $table->unsignedBigInteger('author_id');
+            $table->foreign("author_id")->references('id')->on('users');
+
+            $table->unsignedBigInteger('category_id');
+            $table->foreign('category_id')->references('id')->on('categories');
 
 
             $table->integer('exam_time')->nullable();;

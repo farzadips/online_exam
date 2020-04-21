@@ -18,7 +18,7 @@ class CreateOptionsTable extends Migration
             $table->unsignedBigInteger('question_id');
             $table->foreign('question_id')->references('id')->on('questions');
             $table->string('option',200)->nullable();
-            $table->boolean('ohaspic');
+            $table->boolean('ohaspic')->nullable();
             $table->string('opicaddress',100);
             $table->timestamps();
         });

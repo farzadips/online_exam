@@ -26,6 +26,22 @@
         <div class="form-group w-200"><label for="time">قیمت به تومان:</label> <input type="text"
                                                                                       class="form-control"
                                                                                       name="cost" required></div>
+
+        <div class="form-group">
+            <label for="category_parent">دسته والد</label>
+            <select name="category_id"
+                    class="form-control" id="">
+                <option value="">بدون والد</option>
+                @foreach($categories as $category)
+                    <option value="{{$category->id}}">{{$category->name}}</option>
+                    @if(count($category->childrenRecursive) > 0)
+                        @include('adminpanel.partial.category',['categories'=>$category->childrenRecursive
+                        , 'level'=>1])
+                    @endif
+                @endforeach
+            </select>
+        </div>
+
         <div class="form-group w-200">
             <label for="time">مدت زمان:</label>
             <input type="text" class="form-control" id="time" name="exam_time" placeholder="60" required>
@@ -38,35 +54,6 @@
             <label for="pic">تصویر آزمون:</label>
             <input type="file" name="image" class="form-control" required>
         </div>
-        {{-- 				    <div class="form-group w-200">--}}
-        {{-- 				   	<label for="pic">آیا آزمون هوش و خلاقیت است؟</label>--}}
-        {{-- 				    <input type="checkbox" name="is_creative"class="form-control" value="1">--}}
-        {{-- 				   </div>--}}
-        {{-- 				   <div class="form-group w-200">--}}
-        {{--					    <label for="imagin_start">هوش محاسباتی و خلاقیت:</label>--}}
-        {{--					    <input type="text" class="form-control" name="imagin_start">--}}
-        {{--					    <p>تا</p>--}}
-        {{--					    <input type="text" class="form-control" name="imagin_end">--}}
-        {{-- 				   </div>--}}
-        {{-- 				     <div class="form-group w-200">--}}
-        {{--					    <label for="describe_start">هوش تصویری و استعداد تحلیلی:</label>--}}
-        {{--					    <input type="text" class="form-control" name="describe_start">--}}
-        {{--					    <p>تا</p>--}}
-        {{--					    <input type="text" class="form-control" name="describe_end">--}}
-        {{-- 				   </div>--}}
-        {{-- 				       <div class="form-group w-200">--}}
-        {{--					    <label for="why_start">هوش استدلالی و منطقی:</label>--}}
-        {{--					    <input type="text" class="form-control" name="why_start">--}}
-        {{--					    <p>تا</p>--}}
-        {{--					    <input type="text" class="form-control" name="why_end">--}}
-        {{-- 				   </div>--}}
-        {{-- 				   <div class="form-group w-200">--}}
-        {{--					    <label for="words_start">شماره سوالات هوش کلامی از :</label>--}}
-        {{--					    <input type="text" class="form-control" name="words_start">--}}
-        {{--					    <p>تا</p>--}}
-        {{--					    <input type="text" class="form-control" name="words_end">--}}
-        {{-- 				   </div>--}}
-        {{-- 				 --}}
         <div class="form-group w-200">
             <label for="startdate">تاریخ شروع آزمون :</label>
             <input type="date" name="start_date" class="form-control" placeholder="1398-04-03" required>

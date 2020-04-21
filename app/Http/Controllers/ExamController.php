@@ -18,6 +18,7 @@ class ExamController extends Controller
 {
     public function submit(Request $request)
     {
+
         if (Auth::check()) {
             $user = Auth::user();
             if ($user->roll == "1") {
@@ -41,7 +42,8 @@ class ExamController extends Controller
                         'exam_time' => $request->exam_time, 'cost' => $request->cost, 'type_question' => $request->type_question,
                         'start_date' => $request->start_date, 'end_date' => $request->end_date,
                         'desc' => $request->desc, 'epicaddress' => 'nothing', 'words_start' => $request->words_start,
-                        'words_end' => $request->words_end , 'option_count' => $request->option_count ]);
+                        'words_end' => $request->words_end, 'option_count' => $request->option_count ,
+                        'category_id'=>$request->category_id,'author_id'=>$user->id ]);
                     $image = $request->file('image');
                     $new_name = $exam->exam_name . '.' . $image->getClientOriginalExtension();
                     $exam->epicaddress = $new_name;
@@ -67,18 +69,25 @@ class ExamController extends Controller
     public function showexams()
     {
         if (Auth::check()) {
-            $user = Auth::user();
-            $user_exams = $user->user_exam;
-            $user_exams_model = $user_exams->map(function ($ex) {
-                return Exam::find($ex->exam_id);
-            });
-            $exams_that_not_signed_up = Exam::whereNotIn('id', $user_exams->map(function ($ex) {
-                return $ex->exam_id;
-            }))->get();
+            $auth_user = Auth::user();
+            if ($auth_user->roll == "0") {
 
-            return view('exams', ['exam_signed_up' => $user_exams_model,
-                'exam_not_signed_up' => $exams_that_not_signed_up
-            ]);
+                $user_exams = $auth_user->user_exam;
+                $user_exams_model = $user_exams->map(function ($ex) {
+                    return Exam::find($ex->exam_id);
+                });
+                $exams_that_not_signed_up = Exam::whereNotIn('id', $user_exams->map(function ($ex) {
+                    return $ex->exam_id;
+                }))->get();
+
+                return view('exams', ['exam_signed_up' => $user_exams_model,
+                    'exam_not_signed_up' => $exams_that_not_signed_up
+                ]);
+            }elseif ($auth_user->roll == "1") {
+                $exams = Exam::all();
+                $users = User::all();
+                return view('adminpanel.showexams',compact(['exams','users']));
+            }
         } else {
             return redirect('/login');
         }
