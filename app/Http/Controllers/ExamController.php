@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use Validator;
 use App\Exam;
+use App\Option;
 use App\User_Exam;
 use App\Student_Answer;
 use App\Question;
@@ -42,8 +44,8 @@ class ExamController extends Controller
                         'exam_time' => $request->exam_time, 'cost' => $request->cost, 'type_question' => $request->type_question,
                         'start_date' => $request->start_date, 'end_date' => $request->end_date,
                         'desc' => $request->desc, 'epicaddress' => 'nothing', 'words_start' => $request->words_start,
-                        'words_end' => $request->words_end, 'option_count' => $request->option_count ,
-                        'category_id'=>$request->category_id,'author_id'=>$user->id ]);
+                        'words_end' => $request->words_end, 'option_count' => $request->option_count,
+                        'category_id' => $request->category_id, 'author_id' => $user->id]);
                     $image = $request->file('image');
                     $new_name = $exam->exam_name . '.' . $image->getClientOriginalExtension();
                     $exam->epicaddress = $new_name;
@@ -51,7 +53,7 @@ class ExamController extends Controller
 
                     $image->move(public_path('images.exampic'), $new_name);
 
-                    return view('adminpanel.definequestions', ['exam_name' => $exam->exam_name, 'exam_time' => $exam->exam_time,
+                    return view('adminpanel.options.definequestions', ['exam_name' => $exam->exam_name, 'exam_time' => $exam->exam_time,
                         'question_count' => $exam->question_count, 'exam_id' => $exam->id, 'type_question' => $exam->type_question
                         , 'option_count' => $exam->option_count
                     ]);
@@ -83,13 +85,25 @@ class ExamController extends Controller
                 return view('exams', ['exam_signed_up' => $user_exams_model,
                     'exam_not_signed_up' => $exams_that_not_signed_up
                 ]);
-            }elseif ($auth_user->roll == "1") {
+            } elseif ($auth_user->roll == "1") {
                 $exams = Exam::all();
                 $users = User::all();
-                return view('adminpanel.showexams',compact(['exams','users']));
+                return view('adminpanel.exams.showexams', compact(['exams', 'users']));
             }
         } else {
             return redirect('/login');
+        }
+    }
+
+    public function showmyexams()
+    {
+        $user = Auth::user();
+        if ($user->roll = "1") {
+            $users = User::all();
+            $exams = Exam::all();
+            return view('adminpanel.exams.showmyexams', compact(['user', 'users', 'exams']));
+        } else {
+            return redirect('/logout');
         }
     }
 
@@ -141,6 +155,118 @@ class ExamController extends Controller
 
 
     }
+
+
+    public function add_exam()
+    {
+        $categories = Category::with('childrenRecursive')
+            ->where('parent_id', null)
+            ->get();
+        return view('adminpanel.exams.design', compact(['categories']));
+    }
+
+    public function edit_exam($id)
+    {
+        $exam = Exam::findOrFail($id);
+        $categories = Category::with('childrenRecursive')
+            ->where('parent_id', null)
+            ->get();
+        return view("adminpanel.exams.edit", compact(['exam', 'categories']));
+    }
+
+    public function submit_edit(Request $request, $id)
+    {
+
+        $exam = Exam::FindOrFail($id);
+        $exam->imagin_start = $request->imagin_start;
+        $exam->imagin_end = $request->imagin_end;
+        $exam->exam_name = $request->exam_name;
+        $exam->question_count = $request->question_count;
+        $exam->exam_time = $request->exam_time;
+        $exam->cost = $request->cost;
+        $exam->type_question = $request->type_question;
+        $exam->start_date = $request->start_date;
+        $exam->end_date = $request->end_date;
+        $exam->desc = $request->desc;
+
+        $exam->words_start = $request->words_start;
+        $exam->words_end = $request->words_end;
+        $exam->option_count = $request->option_count;
+        $exam->category_id = $request->category_id;
+
+        $image = $request->file('image');
+        $new_name = $exam->exam_name . '.' . $image->getClientOriginalExtension();
+        $exam->epicaddress = $new_name;
+        $exam->save();
+
+        $image->move(public_path('images.exampic'), $new_name);
+
+        $questions = Question::with('exam')
+            ->where('exam_id', $exam->id)->get();
+
+        $counarray [] = [];
+        for ($i = 0; $i < sizeof($questions); $i++) {
+            $counarray[$i] = $questions[$i]->id;
+        }
+
+        $options = Option::with('question')
+            ->whereIn('question_id', $counarray)->get();
+
+
+        return view('adminpanel.options.editquestions', compact(['exam', 'questions', 'options', 'counarray']));
+    }
+
+    public function submit_question_edit(Request $request, $id)
+    {
+        $question = Question::findOrFail($id);
+        $question->valid = $request->valid;
+        $question->level = $request->level;
+        $question->question = $request->question;
+        $question->save();
+        $options = Option::with('question')->where('question_id', $id)->get();
+
+        for ($i = 0; $i < sizeof($request->option); $i++) {
+            $op_id = $options[$i]->id;
+            $op = Option::findOrFail($op_id);
+            $op->option = $request->option[$i];
+            $op->save();
+        }
+//        ------------------------------------------
+        $exam = Exam::findOrFail($question->exam_id);
+        $questions = Question::with('exam')
+            ->where('exam_id', $exam->id)->get();
+
+        $counarray [] = [];
+        for ($i = 0; $i < sizeof($questions); $i++) {
+            $counarray[$i] = $questions[$i]->id;
+        }
+
+        $options = Option::with('question')
+            ->whereIn('question_id', $counarray)->get();
+//
+        return view('adminpanel.options.editquestions', compact(['exam', 'questions', 'options', 'counarray']));
+
+    }
+
+    public function update(Request $request, $id)
+    {
+        $exam = Exam::findOrFail($id);
+        $category = Category::findOrFail($id);
+
+
+        $category->save();
+        return redirect('/adminpanel/categories');
+    }
+
+
+    public function delete_exam($id)
+    {
+        $exam = Exam::findOrFail($id);
+//        return $exam;
+        $exam->delete();
+        return redirect('/myexams');
+    }
+
 
     private function cmp_date($date1, $date2)
     {

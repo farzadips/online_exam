@@ -42,4 +42,6 @@ class AjaxUploadController extends Controller
        ['success'=>'با موفقیت انجام شد']
       ]);
      }
+
+
 }

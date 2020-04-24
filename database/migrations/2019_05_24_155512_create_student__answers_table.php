@@ -17,9 +17,9 @@ class CreateStudentAnswersTable extends Migration
         Schema::create('student__answers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('user_exam_id')->unsigned();
-            $table->foreign('user_exam_id')->references('id')->on('user__exams');
+            $table->foreign('user_exam_id')->references('id')->on('user__exams')->onDelete('cascade');;
             $table->bigInteger('option_id')->unsigned();
-            $table->foreign('option_id')->references('id')->on('options');
+            $table->foreign('option_id')->references('id')->on('options')->onDelete('cascade');;
             $table->timestamps();
         });
     }

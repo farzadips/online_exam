@@ -48,6 +48,7 @@
                 <li class="nav-item " style="margin-top: 15mm">
                     <span>آزمون ها</span>
                     <a href="/exams"><i class="fa fa-circle-o"></i>لیست سوالات </a>
+                    <a href="/myexams"><i class="fa fa-circle-o"></i>لیست سوالات من </a>
                     <a href="/adminpanel/add_exam"><i class="fa fa-circle-o"></i>افزودن آزمون </a>
                 </li>
                 <hr>
