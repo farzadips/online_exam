@@ -33,7 +33,11 @@
                                 <td style="text-align: center">{{$exam->exam_name}}</td>
                                 <td style="text-align: center">{{$exam->category->name}}</td>
                                 <td style="text-align: center">{{$exam->author->name}} {{$exam->author->lastname}}</td>
+                                <td class="text-center">
+                                    <a class="btn btn-info"
+                                       href="/adminpanel/show_questions/{{$exam->id}}">نمایش سوالات</a>
 
+                                </td>
                             </tr>
                             </tr>
 

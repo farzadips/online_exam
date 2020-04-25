@@ -28,16 +28,13 @@ Route::get('/logout','LoginController@logout');
 Route::prefix('adminpanel')->group(function (){
     Route::get('/','AdminController@index');
     Route::get('/add_exam','ExamController@add_exam');
+    Route::get('/show_questions/{id}','ExamController@show_questions');
     Route::resource('categories','CategoryController');
     Route::post('/delete_exam/{id}','ExamController@delete_exam');
     Route::get('/edit_exam/{id}','ExamController@edit_exam');
     Route::post('/submit_edit/{id}','ExamController@submit_edit');
     Route::post('/submit_question_edit/{id}','ExamController@submit_question_edit');
-
-
 });
-
-
 
 Route::post('/submitexam','ExamController@submit');
 Route::post('/ajax_upload/action', 'AjaxUploadController@action');

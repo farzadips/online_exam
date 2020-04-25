@@ -3,9 +3,10 @@
 
     <form action="/submitexam" method='post' style="direction: rtl; text-align: right;" enctype="multipart/form-data">
         @csrf
+        <div style="background-color: #ffd099">
         <label>نوع سوال را انتخاب کنید:</label>
 
-        <select id="type_question" name="type_question">
+        <select class="select2-container--classic" id="type_question" name="type_question">
             <option value="0">گزینه ای</option>
             <option value="1">جای خالی</option>
         </select>
@@ -73,7 +74,8 @@
                 </ul>
             </div>
         @endif
-    </form>
+        </div>
 
+    </form>
 
 @endsection

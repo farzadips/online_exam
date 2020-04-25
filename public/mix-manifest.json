@@ -1,4 +1,5 @@
 {
+    "/admin/js/app.js": "/admin/js/app.js",
     "/admin/dist/css/dropzone.css": "/admin/dist/css/dropzone.css",
     "/admin/dist/js/dropzone.js": "/admin/dist/js/dropzone.js"
 }

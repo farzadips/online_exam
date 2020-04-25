@@ -107,6 +107,21 @@ class ExamController extends Controller
         }
     }
 
+    public function show_questions($id)
+    {
+        $exam = Exam::findOrFail($id);
+        $questions = Question::with('exam')->where('exam_id',$exam->id)->get();
+        $counarray [] = [];
+        for ($i = 0; $i < sizeof($questions); $i++) {
+            $counarray[$i] = $questions[$i]->id;
+        }
+
+        $options = Option::with('question')
+            ->whereIn('question_id', $counarray)->get();
+
+        return view('adminpanel.exams.show_questions',compact(['exam','questions','options']));
+    }
+
     public function entrycheck(Request $request)
     {
         if (Auth::check()) {
@@ -213,7 +228,7 @@ class ExamController extends Controller
             ->whereIn('question_id', $counarray)->get();
 
 
-        return view('adminpanel.options.editquestions', compact(['exam', 'questions', 'options', 'counarray']));
+        return view('adminpanel.options.editquestions', compact(['exam', 'questions', 'options']));
     }
 
     public function submit_question_edit(Request $request, $id)

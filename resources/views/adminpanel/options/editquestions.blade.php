@@ -54,7 +54,7 @@
                     @endfor
                     <button type="submit" class="btn btn-success">  اتمام ویرایش سوال {{ $i+1 }} و ادامه ویرایش سوالات دیگر  </button>
 {{--                    <a class="button" href="\myexams" >خروج</a>--}}
-                    <button class="btn btn-primary" onclick="window.location.href = '\myexams';">خروج </button>
+                    <a  class="btn btn-primary" href='/myexams'>خروج</a>
 
                     <br>
                     <br><br>
