@@ -71,21 +71,14 @@ class ExamController extends Controller
     public function showexams()
     {
         if (Auth::check()) {
-            $auth_user = Auth::user();
-            if ($auth_user->roll == "0") {
+            $user = Auth::user();
+            if ($user->roll == "0") {
 
-                $user_exams = $auth_user->user_exam;
-                $user_exams_model = $user_exams->map(function ($ex) {
-                    return Exam::find($ex->exam_id);
-                });
-                $exams_that_not_signed_up = Exam::whereNotIn('id', $user_exams->map(function ($ex) {
-                    return $ex->exam_id;
-                }))->get();
 
-                return view('exams', ['exam_signed_up' => $user_exams_model,
-                    'exam_not_signed_up' => $exams_that_not_signed_up
-                ]);
-            } elseif ($auth_user->roll == "1") {
+                $exams= Exam::all();
+
+                return view('exams', compact(['exams','user']));
+            } elseif ($user->roll == "1") {
                 $exams = Exam::all();
                 $users = User::all();
                 return view('adminpanel.exams.showexams', compact(['exams', 'users']));
@@ -107,10 +100,18 @@ class ExamController extends Controller
         }
     }
 
+    public function show_students(Request $request,$id)
+    {
+        $exam = Exam::findOrFail($id);
+        $user_exams = $exam->user_exam;
+
+        return view('adminpanel.exams.show_students',compact(['exam','user_exams']));
+    }
+
     public function show_questions($id)
     {
         $exam = Exam::findOrFail($id);
-        $questions = Question::with('exam')->where('exam_id',$exam->id)->get();
+        $questions = Question::with('exam')->where('exam_id', $exam->id)->get();
         $counarray [] = [];
         for ($i = 0; $i < sizeof($questions); $i++) {
             $counarray[$i] = $questions[$i]->id;
@@ -118,13 +119,18 @@ class ExamController extends Controller
 
         $options = Option::with('question')
             ->whereIn('question_id', $counarray)->get();
-
-        return view('adminpanel.exams.show_questions',compact(['exam','questions','options']));
+        return view('adminpanel.exams.show_questions', compact(['exam', 'questions', 'options']));
     }
 
     public function entrycheck(Request $request)
     {
         if (Auth::check()) {
+            $user_exam = new User_Exam();
+            $user_exam->exam_id = $request->exam_id;
+            $user_exam->user_id = $request->user_id;
+            $user_exam->save();
+
+
             $exam = Exam::where('id', $request->exam_id)->first();
             $start_date = $exam->start_date;
             $end_date = $exam->end_date;
@@ -139,36 +145,16 @@ class ExamController extends Controller
             $start_date = explode("-", $start_date);
             $end_date = explode("-", $end_date);
             $user = Auth::user();
-            if (($this->cmp_date($jalali, $start_date) && $this->cmp_date($end_date, $jalali)) || $user->id == 30) {
-                $user_obj = User::where('id', $user->id)->first();
-                $user_exam = $user_obj->user_exam->where('exam_id', $exam->id)->first();
-                if ($user_exam != null) {
-                    if (Student_Answer::where('user_exam_id', $user_exam->id)->first() == null) {
-                        $questions = Question::where('exam_id', $exam->id)->orderBy('id', 'ASC')->get();
+            $user_obj = User::where('id', $user->id)->first();
+            $questions = Question::with('exam')
+                ->where('exam_id', $exam->id)->get();
 
-                        foreach ($questions as $question) {
-                            $option[] = $question->option;
-                        }
-                        return view('exam', ['questions' => $questions, 'options' => $option, 'exam' => $exam]);
-                    } else {
-                        return redirect('/exams')->with('once_error', 'شما یک بار در این آزمون شرکت کرده اید');
-                    }
-
-                } else {
-                    return redirect('/exams')->with('signup_error', 'شما در این آزمون ثبته نام نکرده اید');
-
-                }
-
-
-            } else {
-                return redirect('/exams')->with('time_error', 'زمان ورود مجاز نیست');
+            foreach ($questions as $question) {
+                $options[] = $question->option;
             }
 
-        } else {
-            return redirect('/login');
+            return view('exam', ['questions' => $questions, 'options' => $options, 'exam' => $exam]);
         }
-
-
     }
 
 
@@ -258,7 +244,7 @@ class ExamController extends Controller
 
         $options = Option::with('question')
             ->whereIn('question_id', $counarray)->get();
-//
+
         return view('adminpanel.options.editquestions', compact(['exam', 'questions', 'options', 'counarray']));
 
     }

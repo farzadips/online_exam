@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
          <link href="{{ asset('css/holdexam.css') }}" rel="stylesheet">
-      
+
 </head>
 <body>
   <div class="row center">
@@ -23,10 +23,10 @@
   <h3>بسم تعالی</h3>
 </div>
 <div class="row center">
-  <img  style="width:12rem;height: 12rem;margin-top: 1rem;"src="{{ asset('images/logo.png') }}">
+  <img  style="width:12rem;height: 12rem;margin-top: 1rem;"src="{{ asset('images/tua.gif') }}">
 </div>
 <div class="row center mt-4">
-<h2>موسسه نوآور اردوش</h2>
+<h2>پروژه کارشناسی ازمون انلاین</h2>
 </div>
 <div class="row center mt-4">
     <h3>{{$exam->exam_name}}</h3>
@@ -46,7 +46,7 @@
        <li class="mt-4">در صورت ترک کردن این صفحه بدون ذخیره پاسخ ها و بازگشت دوباره آزمون از اول شروع میشود.</li>
      </ul>
    </div>
-    
+
 	<br><br>
 	<hr>
 
@@ -69,7 +69,7 @@
     <br>
 		@endif
   <div class="d-flex flex-wrap">
-		@for($j=0;$j<5;$j++)
+		@for($j=0;$j<$exam->option_count;$j++)
     @if(isset($options[$i][$j]))
 		<div style="margin-left:3rem">
        <span style="direction:ltr;margin:0 5px" class="f-1-5">{{$j+1}}-</span><span class="f-1-3" style="margin:0 5px">{{$options[$i][$j]->option}}<span>&nbsp;
@@ -78,9 +78,11 @@
         @endif
         <input class="option-image" type="radio"  name="question{{$i}}"
         value="{{$options[$i][$j]->id}}" style="width:3rem;height:3rem;">
+                </span>
+            </span>
         </div>
         @endif
-        
+
      @endfor
  </div>
      @php
@@ -92,7 +94,7 @@
          <br><br>
      </div>
         </form>
-       
+
 	</div>
 </div>
 <br><br>
@@ -111,21 +113,21 @@ var x = setInterval(function() {
 
   // Get today's date and time
   var now = new Date().getTime();
-    
+
   // Find the distance between now and the count down date
   var distance = d2 - now;
-    
+
   // Time calculations for days, hours, minutes and seconds
 
   var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
   var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    
+
   // Output the result in an element with id="demo"
   document.getElementById("demo").innerHTML = hours + "h "
   + minutes + "m " + seconds + "s ";
-    
-  // If the count down is over, write some text 
+
+  // If the count down is over, write some text
   if (distance < 0) {
     clearInterval(x);
     document.getElementById("demo").innerHTML = "EXPIRED";

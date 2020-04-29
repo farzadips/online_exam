@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
-     
+
 
      public $timestamps = false;
     /**
@@ -27,10 +27,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 
+        'password',
     ];
 
-    
+
 
     /**
      * The attributes that should be cast to native types.
@@ -40,5 +40,10 @@ class User extends Authenticatable
     public function user_exam(){
         return $this->hasMany('App\User_Exam');
     }
-    
+
+    public function exams()
+    {
+        return $this->hasMany(Exam::class)->orderBy('author_id');
+    }
+
 }

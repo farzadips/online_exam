@@ -16,11 +16,12 @@ class CreateUserExamsTable extends Migration
         Schema::create('user__exams', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('exam_id');
-            $table->foreign('exam_id')->references('id')->on('exams')->onDelete('cascade');;
+            $table->foreign('exam_id')->references('id')->on('exams')->onDelete('cascade');
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');;
-            $table->integer('pay');
-			$table->integer('refID');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->float('percent')->nullable();
+//            $table->integer('pay')->nullable();
+//			$table->integer('refID')->nullable();
             $table->timestamps();
     });
 }

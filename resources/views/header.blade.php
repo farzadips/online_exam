@@ -1,20 +1,20 @@
   <div class="container-fluid">
-    
+
   	<div class="row" style="direction: rtl;">
-      
+
   		<div class="d-flex" style="width: 100%;height: 15rem; background:  #1da1f2;
      padding-top: 1em;">
      <div class="col-sm-8">
-      <p style="font-size: 2vw;color: white;margin-top: 4rem;margin-left: 3rem;">آزمون های آنلاین موسسه اردوش</p>
+      <p style="font-size: 2vw;color: white;margin-top: 4rem;margin-left: 3rem;">آزمون های آنلاین </p>
      </div>
      <div class="col-sm-3">
-       
+
      </div>
      <div class="col-sm-1">
-    <img  style="float:left;width:12rem;height: 12rem;margin-top: 1rem;margin-left: 1rem;"src="{{ asset('images/logo.png') }}">
+    <img  style="float:left;width:12rem;height: 12rem;margin-top: 1rem;margin-left: 1rem;"src="{{ asset('images/tua.gif') }}">
      </div>
-  		
-  
+
+
   	</div>
   </div>
   </div>

@@ -23,7 +23,8 @@ class AjaxUploadController extends Controller
             $question->save();
         }
         $question_id=$question->id;
-        for ($i=0; $i <2 ; $i++) {
+        $option_count = $question->exam->option_count;
+        for ($i=0; $i <$option_count ; $i++) {
             $option = Option::create(['question_id'=>$question_id,'option'=>$request->option[$i]]);
             if (isset($request->select_file[$i])){
                 $image = $request->select_file[$i];

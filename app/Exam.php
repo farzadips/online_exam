@@ -20,7 +20,7 @@ class Exam extends Model
 
     public function user_exam()
     {
-        return $this->hasMany('App\User_Exam');
+        return $this->hasMany(User_Exam::class);
     }
 
     public function category()

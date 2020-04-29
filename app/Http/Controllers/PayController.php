@@ -48,24 +48,24 @@ class PayController extends Controller
 
     }
     public function order(Request $request){
-        session_start();
-        $exam=Exam::find($request->exam_id);
-        $cost=$exam->cost;
-        $exam_name=$exam->exam_name;
-        $zarinpal = new Zarinpal('XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX');
-        $zarinpal->enableSandbox();
-        // $zarinpal->isZarinGate(); // active zarinGate mode
-        $results = $zarinpal->request(
-            "http://exam.test/verify",          //required
-            $cost,                                    //required
-            $exam_name                            //required
-        );
-        if (isset($results['Authority'])) {
-            $_SESSION['cost']=$cost;
-            $_SESSION['exam_id']=$request->exam_id;
-            $_SESSION['Authority'] = $results['Authority'];
-            $zarinpal->redirect();
-        }
+//        session_start();
+//        $exam=Exam::find($request->exam_id);
+//        $cost=$exam->cost;
+//        $exam_name=$exam->exam_name;
+//        $zarinpal = new Zarinpal('XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX');
+//        $zarinpal->enableSandbox();
+//        // $zarinpal->isZarinGate(); // active zarinGate mode
+//        $results = $zarinpal->request(
+//            "http://exam.test/verify",          //required
+//            $cost,                                    //required
+//            $exam_name                            //required
+//        );
+//        if (isset($results['Authority'])) {
+//            $_SESSION['cost']=$cost;
+//            $_SESSION['exam_id']=$request->exam_id;
+//            $_SESSION['Authority'] = $results['Authority'];
+//            $zarinpal->redirect();
+//        }
 
     }
 }

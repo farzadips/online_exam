@@ -3,7 +3,10 @@
 
     <form action="/submitexam" method='post' style="direction: rtl; text-align: right;" enctype="multipart/form-data">
         @csrf
-        <div style="background-color: #ffd099">
+        <div style="margin: 40px">
+            <br>
+            <br>
+            <br>
         <label>نوع سوال را انتخاب کنید:</label>
 
         <select class="select2-container--classic" id="type_question" name="type_question">

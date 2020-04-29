@@ -28,6 +28,7 @@ Route::get('/logout','LoginController@logout');
 Route::prefix('adminpanel')->group(function (){
     Route::get('/','AdminController@index');
     Route::get('/add_exam','ExamController@add_exam');
+    Route::get('/show_students/{id}','ExamController@show_students');
     Route::get('/show_questions/{id}','ExamController@show_questions');
     Route::resource('categories','CategoryController');
     Route::post('/delete_exam/{id}','ExamController@delete_exam');
@@ -37,7 +38,7 @@ Route::prefix('adminpanel')->group(function (){
 });
 
 Route::post('/submitexam','ExamController@submit');
-Route::post('/ajax_upload/action', 'AjaxUploadController@action');
+Route::any('/ajax_upload/action', 'AjaxUploadController@action');
 Route::post('/ajax_upload/show', 'AjaxUploadController@show');
 
 Route::get('/userpanel','UserController@index');

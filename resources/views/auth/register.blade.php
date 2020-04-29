@@ -36,7 +36,7 @@
                             <option value="0">دانشجو</option>
                             <option value="1">استاد</option>
                         </select> <br><br>
-                        <label class="label" style="color: #1da1f2;font-size:1.2rem;">شماره تلفن همراه:</label><br>
+                        <label class="label" style="color: #1da1f2;font-size:1.2rem;">رمز عبور</label><br>
                         <input class="user"
                                style="width: 80%;height: 2.5rem;border:1px solid #d3d3d3;border-radius: 5px;"
                                type="text" name="password"

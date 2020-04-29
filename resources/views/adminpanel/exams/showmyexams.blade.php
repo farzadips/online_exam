@@ -47,6 +47,8 @@
                                                 </button>
                                             </form>
                                         </div>
+                                        <a class="btn btn-success"
+                                           href="/adminpanel/show_students/{{$exam->id}}">دانشجویان</a>
                                     </td>
                                 @endif
                             </tr>

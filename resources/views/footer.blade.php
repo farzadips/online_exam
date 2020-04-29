@@ -4,7 +4,7 @@
 <footer class="page-footer font-small blue footer">
 
   <!-- Copyright -->
-  <div class="footer-copyright text-center py-3"> <p style="color:#1da1f2">© تمامی حقوق مربوط به این وبسایت و محتوای داخل آن به موسسه دانش بنیان اردوش متعلق است</p>
+  <div class="footer-copyright text-center py-3"> <p style="color:#1da1f2">© تمامی حقوق مربوط به این وبسایت و محتوای داخل آن به دانشگاه تبریز و دپارتمان علوم کامپیوتر متعلق است</p>
   </div>
   <!-- Copyright -->
 
