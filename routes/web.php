@@ -22,7 +22,7 @@ Route::get('/resetpassword','LoginController@reset_index');
 Route::post('/resetpassword','LoginController@resetpassword');
 Route::get('/signup', 'SignUpController@index');
 Route::post('/signup', 'SignUpController@register');
-Route::get('/logout','LoginController@logout');
+Route::post('/logout','LoginController@logout');
 
 
 Route::prefix('adminpanel')->group(function (){

@@ -402,10 +402,13 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="/logout"><i class="fa fa-close"></i> خروج </a>
+                    <a class="fa fa-close" href="/logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">خروج</a>
+                    <div>
+                        <form id="logout-form" action="/logout" method="post" style="display: none">
+                            @csrf
+                        </form>
+                    </div>
                 </li>
-
-
                 <ul class="treeview-menu">
                     <li><a href="pages/examples/invoice.html"><i class="fa fa-circle-o"></i> Invoice</a></li>
                     <li><a href="pages/examples/profile.html"><i class="fa fa-circle-o"></i> Profile</a></li>
@@ -418,8 +421,6 @@
                     <li><a href="pages/examples/pace.html"><i class="fa fa-circle-o"></i> Pace Page</a></li>
                 </ul>
                 </li>
-                li class="treeview">
-
                 </li>
             </ul>
             </li>
