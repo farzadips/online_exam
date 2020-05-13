@@ -30,6 +30,7 @@ Route::prefix('adminpanel')->group(function (){
     Route::get('/add_exam','ExamController@add_exam');
     Route::get('/show_students/{id}','ExamController@show_students');
     Route::get('/show_questions/{id}','ExamController@show_questions');
+    Route::get('/download/questions/{id}','ExamController@downloadPdf')->name('download');
     Route::resource('categories','CategoryController');
     Route::post('/delete_exam/{id}','ExamController@delete_exam');
     Route::get('/edit_exam/{id}','ExamController@edit_exam');
