@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use Illuminate\Http\Response;
+use PDF;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use Validator;
@@ -157,7 +159,6 @@ class ExamController extends Controller
         }
     }
 
-
     public function add_exam()
     {
         $categories = Category::with('childrenRecursive')
@@ -259,7 +260,6 @@ class ExamController extends Controller
         return redirect('/adminpanel/categories');
     }
 
-
     public function delete_exam($id)
     {
         $exam = Exam::findOrFail($id);
@@ -267,7 +267,6 @@ class ExamController extends Controller
         $exam->delete();
         return redirect('/myexams');
     }
-
 
     private function cmp_date($date1, $date2)
     {
@@ -286,5 +285,23 @@ class ExamController extends Controller
         else
             return true; // When two dates are equal.
     }
-}
 
+    /**
+     * Force client agent to download questions of given exam as a PDF file.
+     *
+     * @param  int $id
+     * @return Response
+     */
+    public function downloadPdf($id)
+    {
+        $exam = Exam::findOrFail($id);
+        $questions = Question::with('exam')->where('exam_id', $exam->id)->get();
+        $countArray = [];
+        foreach ($questions as $question) {
+            array_push($countArray, $question->id);
+        }
+        $options = Option::with('question')->whereIn('question_id', $countArray)->get();
+        return PDF::loadView('adminpanel.exams.show_questions_download', compact('exam', 'questions', 'options'), [], 'UTF-8')
+            ->download("questions_for_exam_$id.pdf");
+    }
+}
