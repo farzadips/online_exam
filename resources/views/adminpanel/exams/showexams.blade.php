@@ -34,13 +34,10 @@
                                 <td style="text-align: center">{{$exam->category->name}}</td>
                                 <td style="text-align: center">{{$exam->author->name}} {{$exam->author->lastname}}</td>
                                 <td class="text-center">
-                                    <a class="btn btn-info"
-                                       href="/adminpanel/show_questions/{{$exam->id}}">نمایش سوالات</a>
-
+                                    <a class="btn btn-info" href="/adminpanel/show_questions/{{$exam->id}}">نمایش سوالات</a>
+                                    <a class="btn btn-info" href="{{route('download', ['id' => $exam->id])}}">دانلود</a>
                                 </td>
                             </tr>
-                            </tr>
-
                         @endforeach
                         </tbody>
                     </table>
