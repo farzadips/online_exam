@@ -4,13 +4,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>صفحه مدیریت آزمون آنلاین</title>
-    ></div>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
     <link rel="stylesheet" href="/admin/bootstrap/css/bootstrap.min.css">
-    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
-    <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
+{{--    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>--}}
+{{--    <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">--}}
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="/admin/fonts-awesome/css/font-awesome.min.css">
