@@ -29,6 +29,7 @@
                         <tbody>
                         @foreach($exams as $exam)
                             <tr style="direction: rtl">
+                                @if($exam->show_to_others == 1 || $exam->author_id == $user->id )
                                 <td style="text-align: center">{{$exam->id}}</td>
                                 <td style="text-align: center">{{$exam->exam_name}}</td>
                                 <td style="text-align: center">{{$exam->category->name}}</td>
@@ -38,6 +39,7 @@
                                     <a class="btn btn-info" href="{{route('download', ['id' => $exam->id])}}">دانلود</a>
                                 </td>
                             </tr>
+                            @endif
                         @endforeach
                         </tbody>
                     </table>

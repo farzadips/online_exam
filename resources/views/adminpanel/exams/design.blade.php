@@ -45,6 +45,12 @@
                 @endforeach
             </select>
         </div>
+            <label>آیا بقیه اساتید این سوال رو میتوانند ببینند؟</label>
+
+            <select class="select2-container--classic" id="show_to_others" name="show_to_others">
+                <option value="0">خیر</option>
+                <option value="1">بله</option>
+            </select>
 
         <div class="form-group w-200">
             <label for="time">مدت زمان:</label>

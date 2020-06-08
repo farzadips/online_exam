@@ -18,6 +18,7 @@ class CreateExamsTable extends Migration
             $table->string('exam_name',60)->nullable();;
             $table->integer('type_question')->nullable();;
             $table->integer('question_count')->nullable();
+            $table->integer('show_to_others')->nullable();
 
             $table->unsignedBigInteger('author_id');
             $table->foreign("author_id")->references('id')->on('users')->onDelete('cascade');
