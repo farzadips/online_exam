@@ -26,43 +26,48 @@
                   style="direction: rtl; text-align: right;"
                   enctype="multipart/form-data">
                 @csrf
-                <p style="font-size: 1.2rem"><span>{{$i}}-</span><input class="w-400" type="text"
-                                                                        name="question"
-                                                                        value="{{$questions[$i]->question}}"
-                                                                        readonly><span>؟</span>
-                    <span><input style="margin-right: 2rem;" type="file" name="select_file_0" readonly></span></p><br>
-                <span>جواب صحیح :</span><input readonly type="text" name="valid" value="{{$questions[$i]->valid}}"
-                                               placeholder="برای مثال  3" required><br><br>
-                <span>سطح سوال :</span>
-                <select name="level">
-                    <option value="1">بسیار آسان</option>
-                    <option value="2">آسان</option>
-                    <option value="3">متوسط</option>
-                    <option value="4">کمی دشوار</option>
-                    <option value="5">دشوار</option>
-                </select>
-                <br><br>
-
-                <br>
-                <input readonly type="hidden" name="exam_id" value="{{$questions[$i]->exam_id}}">
-
-                @for($j = $i * $exam->option_count ;$j < ($i+1)*$exam->option_count ;$j++)
-                    <span>گزینه {{$j}}- </span><input readonly class="w-200" type="text"
-                                                      value="{{$options[$j]->option}}"
-                                                      name="option[]"><input readonly type="file" name="select_file[]">
+                <p style="font-size: 1.2rem"><span>سوال {{$i+1}}-</span><input class="w-400" type="text"
+                                                                               name="question"
+                                                                               value="{{$questions[$i]->question}}"
+                                                                               readonly><span>؟</span>
                     <br>
+                    <span>جواب صحیح :</span><input readonly type="text" name="valid" value="{{$questions[$i]->valid}}"
+                                                   placeholder="برای مثال  3" required><br><br>
+                    <span>سطح سوال :</span>
+                    @if( $questions[$i]->level == 1 )
+                        <span>بسیار اسان</span>
+                    @endif
+                    @if( $questions[$i]->level == 2 )
+                        <span> اسان</span>
+                    @endif
+                    @if( $questions[$i]->level == 3 )
+                        <span>متوسط</span>
+                    @endif
+                    @if( $questions[$i]->level == 4 )
+                        <span>کمی دشوار</span>
+                    @endif
+                    @if( $questions[$i]->level == 5 )
+                        <span>دشوار</span>
+                    @endif
+
+
+                    <br><br>
+
+                    <br>
+                    <input readonly type="hidden" name="exam_id" value="{{$questions[$i]->exam_id}}">
+
+                    @for($j = $i * $exam->option_count ;$j < ($i+1)*$exam->option_count ;$j++)
+                        <span> </span><input readonly class="w-200" type="text"
+                                             value="{{$options[$j]->option}}"
+                                             name="option[]">
+                        <br>
+                        <br>
+                        <br><br>
+                        <br>
+                    @endfor
+
                     <br>
                     <br><br>
-                    <br>
-                @endfor
-                <button type="submit" class="btn btn-success"> اتمام ویرایش سوال {{ $i+1 }} و ادامه ویرایش سوالات
-                    دیگر
-                </button>
-                {{--                    <a class="button" href="\myexams" >خروج</a>--}}
-                <a class="btn btn-primary" href='/myexams'>خروج</a>
-
-                <br>
-                <br><br>
                 <hr>
                 <div id="msg">
 
