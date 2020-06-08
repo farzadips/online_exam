@@ -22,7 +22,6 @@ class ExamController extends Controller
 {
     public function submit(Request $request)
     {
-
         if (Auth::check()) {
             $user = Auth::user();
             if ($user->roll == "1") {
@@ -43,7 +42,7 @@ class ExamController extends Controller
                 } else {
 
                     $exam = Exam::create(['imagin_start' => $request->imagin_start, 'imagin_end' => $request->imagin_end, 'exam_name' => $request->exam_name, 'question_count' => $request->question_count,
-                        'exam_time' => $request->exam_time, 'cost' => $request->cost, 'type_question' => $request->type_question,
+                        'exam_time' => $request->exam_time, 'show_to_others' => $request->show_to_others, 'cost' => $request->cost, 'type_question' => $request->type_question,
                         'start_date' => $request->start_date, 'end_date' => $request->end_date,
                         'desc' => $request->desc, 'epicaddress' => 'nothing', 'words_start' => $request->words_start,
                         'words_end' => $request->words_end, 'option_count' => $request->option_count,
@@ -77,13 +76,13 @@ class ExamController extends Controller
             if ($user->roll == "0") {
 
 
-                $exams= Exam::all();
+                $exams = Exam::all();
 
-                return view('exams', compact(['exams','user']));
+                return view('exams', compact(['exams', 'user']));
             } elseif ($user->roll == "1") {
                 $exams = Exam::all();
                 $users = User::all();
-                return view('adminpanel.exams.showexams', compact(['exams', 'users']));
+                return view('adminpanel.exams.showexams', compact(['exams', 'users', 'user']));
             }
         } else {
             return redirect('/login');
@@ -102,12 +101,12 @@ class ExamController extends Controller
         }
     }
 
-    public function show_students(Request $request,$id)
+    public function show_students(Request $request, $id)
     {
         $exam = Exam::findOrFail($id);
         $user_exams = $exam->user_exam;
 
-        return view('adminpanel.exams.show_students',compact(['exam','user_exams']));
+        return view('adminpanel.exams.show_students', compact(['exam', 'user_exams']));
     }
 
     public function show_questions($id)
@@ -221,10 +220,16 @@ class ExamController extends Controller
     public function submit_question_edit(Request $request, $id)
     {
         $question = Question::findOrFail($id);
+
         $question->valid = $request->valid;
         $question->level = $request->level;
         $question->question = $request->question;
+
+        $last_option_id = Option::with('question')->where('question_id', $id)->get();
+        $option_count = Exam::with('question')->first()->option_count;
+        $question->valid = $last_option_id[sizeof($last_option_id) - 1]->id - ($option_count - $request->valid);
         $question->save();
+
         $options = Option::with('question')->where('question_id', $id)->get();
 
         for ($i = 0; $i < sizeof($request->option); $i++) {
@@ -289,7 +294,7 @@ class ExamController extends Controller
     /**
      * Force client agent to download questions of given exam as a PDF file.
      *
-     * @param  int $id
+     * @param int $id
      * @return Response
      */
     public function downloadPdf($id)
