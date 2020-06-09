@@ -14,7 +14,7 @@ class AjaxUploadController extends Controller
     {
 
         $question = Question::create(['exam_id' => $request->exam_id, 'question' => $request->question,
-            'valid' => 0, 'level' => $request->level]);
+            'valid' => $request->valid, 'level' => $request->level]);
 
         if ($request->hasFile('select_file_0')) {
             $image0 = $request->file('select_file_0');
@@ -35,10 +35,7 @@ class AjaxUploadController extends Controller
                 $option->opicaddress = $new_name;
                 $option->save();
             }
-            $last_option_id = Option::all()->last()->id;
-            $last_question = Question::all()->last() ;
-            $last_question->valid =  $last_option_id - ($option_count - $request->valid);
-            $last_question->save();
+
         }
 
         return response()->json([
