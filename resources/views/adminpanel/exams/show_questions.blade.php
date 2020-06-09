@@ -26,11 +26,12 @@
                       style="direction: rtl; text-align: right;"
                       enctype="multipart/form-data">
                     @csrf
-                    <a class="btn-primary" href="{{route('cart.add',['id'=>$questions[$i]->id])}}"> <span>افزودن به سبد سوالات</span> </a>
+                    <a class="btn-primary" href="{{route('cart.add',['id'=>$questions[$i]->id])}}"> <span>افزودن به سبد سوالات</span>
+                    </a>
                     <p style="font-size: 1.2rem"><span>سوال {{$i+1}}-</span><input class="w-400" type="text"
-                                                                              name="question"
-                                                                              value="{{$questions[$i]->question}}"
-                                                                              readonly><span>؟</span>
+                                                                                   name="question"
+                                                                                   value="{{$questions[$i]->question}}"
+                                                                                   readonly><span>؟</span></p>
                         <br>
                         <span>جواب صحیح :</span><input readonly type="text" name="valid"
                                                        value="{{$questions[$i]->valid}}"
@@ -56,19 +57,18 @@
                         <br>
                         <input readonly type="hidden" name="exam_id" value="{{$questions[$i]->exam_id}}">
 
-                        @for($j = $i * $exam->option_count ;$j < ($i+1)*$exam->option_count ;$j++)
-                            <span>- </span><input readonly class="w-200" type="text"
-                                                                                  value="{{$options[$j]->option}}"
-                                                                                  name="option[]"><input readonly
-                                                                                                         type="file"
-                                                                                                         name="select_file[]">
+                        @foreach($questions[$i]->option as $option)
+
+                            <span>- </span><input readonly class="w-200" type="text" value="{{$option->option}}"
+                                                  name="option[]"><input readonly
+                                                                         type="file"
+                                                                         name="select_file[]">
                             <br>
                             <br>
                             <br><br>
                             <br>
-                        @endfor
+                        @endforeach
 
-                        {{--                    <a class="button" href="\myexams" >خروج</a>--}}
 
                         <br>
                         <br><br>
