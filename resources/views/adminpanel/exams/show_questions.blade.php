@@ -26,6 +26,7 @@
                       style="direction: rtl; text-align: right;"
                       enctype="multipart/form-data">
                     @csrf
+                    <a class="btn-primary" href="{{route('cart.add',['id'=>$questions[$i]->id])}}"> <span>افزودن به سبد سوالات</span> </a>
                     <p style="font-size: 1.2rem"><span>سوال {{$i+1}}-</span><input class="w-400" type="text"
                                                                               name="question"
                                                                               value="{{$questions[$i]->question}}"
