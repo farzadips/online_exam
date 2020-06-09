@@ -74,7 +74,7 @@
             <!-- ./col -->
         </div>
         <div class="text-center" style="margin: 40px">
-        <a href="\adminpanel/add_exam" class="dropdown-toggle" data-toggle="dropdown">
+        <a href="/adminpanel/add_exam" class="dropdown-toggle" data-toggle="dropdown">
             <img style="width: 100px;height:100px" src="{{asset('images/plus.png')}}" class="user-image"
                  alt="User Image">
             <br>

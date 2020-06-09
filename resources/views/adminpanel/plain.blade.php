@@ -74,6 +74,7 @@
                             <img src="/images/logo2.png" class="user-image" alt="User Image">
                             <span class="hidden-xs">آزمون آنلاین</span>
                         </a>
+
                     </li>
                 </ul>
             </div>
@@ -139,6 +140,18 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{route('categories.index')}}"><i class="fa fa-folder-o"></i>لیست دسته بندی ها </a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-pie-chart"></i>
+                        <span>سبد سوالات</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{route('cart.show')}}"><i class="fa fa-folder-o"></i>لیست دسته بندی ها </a>
                         </li>
 
                     </ul>
