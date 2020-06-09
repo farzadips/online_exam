@@ -23,7 +23,7 @@ class CreateExamsTable extends Migration
             $table->unsignedBigInteger('author_id');
             $table->foreign("author_id")->references('id')->on('users')->onDelete('cascade');
 
-            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('category_id')->nullable();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');;
 
 
