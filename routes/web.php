@@ -36,6 +36,8 @@ Route::prefix('adminpanel')->group(function (){
     Route::get('/edit_exam/{id}','ExamController@edit_exam');
     Route::post('/submit_edit/{id}','ExamController@submit_edit');
     Route::post('/submit_question_edit/{id}','ExamController@submit_question_edit');
+    Route::get('/add-question-to-cart/{id}',
+        'CartController@addToCart')->name('cart.add');
 });
 
 Route::post('/submitexam','ExamController@submit');

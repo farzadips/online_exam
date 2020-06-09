@@ -20,7 +20,8 @@
   </div>
 
   <div class="d-flex" style="margin-bottom: 0 ;border-bottom:#d6d6d6 .1rem solid;  font-weight: 800;font-size:1rem">
-       <div class="mr-auto menu-option-settingn" style="margin:1rem;margin-left: 6rem; font-size: 1.2rem"><a href="@yield('link')" class="menu-items">@yield('title')</a></div>
+
+      <div class="mr-auto menu-option-settingn" style="margin:1rem;margin-left: 6rem; font-size: 1.2rem"><a href="/logout" class="menu-items">@yield('title')</a></div>
       @if(Auth::check())
        <div class="menu-option-setting"><a href="/userpanel" class="menu-items">پنل کاربری</a></div>
         <div class="menu-option-setting"><a href="/results" class="menu-items">نتایج آزمون ها</a></div>
