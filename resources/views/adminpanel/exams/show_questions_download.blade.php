@@ -31,8 +31,7 @@
                                                                                value="{{$questions[$i]->question}}"
                                                                                readonly><span>؟</span>
                     <br>
-                    <span>جواب صحیح :</span><input readonly type="text" name="valid" value="{{$questions[$i]->valid}}"
-                                                   placeholder="برای مثال  3" required><br><br>
+
                     <span>سطح سوال :</span>
                     @if( $questions[$i]->level == 1 )
                         <span>بسیار اسان</span>
