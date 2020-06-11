@@ -44,14 +44,17 @@
                     <br>
                     <input type="hidden" name="exam_id" value="{{$questions[$i]->exam_id}}">
 
-                    @for($j = $i * $exam->option_count ;$j < ($i+1)*$exam->option_count ;$j++)
-                        <span>گزینه {{$j}}- </span><input class="w-200" type="text"
-                                                          value="{{$options[$j]->option}}"
-                                                          name="option[]"><input type="file" name="select_file[]"><br>
+                    @foreach($questions[$i]->option as $option)
+
+                        <span>- </span><input  class="w-200" type="text" value="{{$option->option}}"
+                                              name="option[]"><input
+                                                                     type="file"
+                                                                     name="select_file[]">
+                        <br>
                         <br>
                         <br><br>
                         <br>
-                    @endfor
+                    @endforeach
                     <button type="submit" class="btn btn-success">  اتمام ویرایش سوال {{ $i+1 }} و ادامه ویرایش سوالات دیگر  </button>
 {{--                    <a class="button" href="\myexams" >خروج</a>--}}
                     <a  class="btn btn-primary" href='/myexams'>خروج</a>

@@ -32,7 +32,7 @@
                                 <tr style="direction: rtl">
                                     <td style="text-align: center">{{$exam->id}}</td>
                                     <td style="text-align: center">{{$exam->exam_name}}</td>
-                                    <td style="text-align: center">{{$exam->category->name}}</td>
+                                    <td style="text-align: center">{{isset($exam->category->name) ? $exam->category->name : 'دسته بندی ندارد' }}</td>
 
                                     <td class="text-center">
                                         <a class="btn btn-warning"
