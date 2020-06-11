@@ -34,7 +34,7 @@
                                                                                    readonly><span>؟</span></p>
                         <br>
                         <span>جواب صحیح :</span><input readonly type="text" name="valid"
-                                                       value="{{$questions[$i]->valid}}"
+                                                       value="{{$questions[$i]->valid - $questions[$i]->option[0]->id +1 }}"
                                                        placeholder="برای مثال  3" required><br><br>
                         @if( $questions[$i]->level == 1 )
                             <span>بسیار اسان</span>
@@ -60,9 +60,7 @@
                         @foreach($questions[$i]->option as $option)
 
                             <span>- </span><input readonly class="w-200" type="text" value="{{$option->option}}"
-                                                  name="option[]"><input readonly
-                                                                         type="file"
-                                                                         name="select_file[]">
+                                                  name="option[]">
                             <br>
                             <br>
                             <br><br>

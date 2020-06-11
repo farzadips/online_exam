@@ -1,11 +1,12 @@
 @extends('adminpanel.plain')
 @section('content')
-    @if(\Illuminate\Support\Facades\Session::has('cart'))
+    @if(\Illuminate\Support\Facades\Session::has('cart') && sizeof(\Illuminate\Support\Facades\Session::get('cart')->questions) > 0))
         <li>
             <table class="table">
                 <form action="/adminpanel/save_cart" method='post'
                       style="direction: rtl; text-align: right;"
                       enctype="multipart/form-data">
+
                     @foreach(\Illuminate\Support\Facades\Session::get('cart')->questions as $session_item)
                         <div style="text-align: right;margin-right: 1.5rem;">
 
@@ -41,11 +42,15 @@
                                                                              type="file"
                                                                              name="select_file[]">
                                 <br>
-                                <br>
+
                                 <br><br>
                                 <br>
                             @endforeach
+                            <a class="btn btn-primary" data-toggle="tooltip" title="حذف"  href="{{route('cart.remove', ['id' =>$session_item['question']->id])}}"><i class="fa fa-minus"></i></a>
 
+
+                            <br>
+                            <br>
                         </div>
                     @endforeach
                     <br>
@@ -63,6 +68,7 @@
                     <br>
                     <br>
                     <button type="submit" class="btn btn-success"> ذخیره به عنوان سوال جدید</button>
+                        <br>
 
                 </form>
 

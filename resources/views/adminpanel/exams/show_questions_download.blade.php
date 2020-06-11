@@ -58,9 +58,7 @@
                     @foreach($questions[$i]->option as $option)
 
                         <span>- </span><input readonly class="w-200" type="text" value="{{$option->option}}"
-                                              name="option[]"><input readonly
-                                                                     type="file"
-                                                                     name="select_file[]">
+                                              name="option[]">
                         <br>
                         <br>
                         <br><br>

@@ -25,11 +25,11 @@
                 <form action="/adminpanel/submit_question_edit/{{$questions[$i]->id}}" method='post' style="direction: rtl; text-align: right;"
                       enctype="multipart/form-data">
                     @csrf
-                    <p style="font-size: 1.2rem"><span>{{$i}}-</span><input class="w-400" type="text"
+                    <p style="font-size: 1.2rem"><span>{{$i+1}}-</span><input class="w-400" type="text"
                                                                             name="question"
                                                                             value="{{$questions[$i]->question}}"><span>؟</span>
                         <span><input style="margin-right: 2rem;" type="file" name="select_file_0"></span></p><br>
-                    <span>جواب صحیح :</span><input type="text" name="valid" value="{{$questions[$i]->valid}}"
+                    <span>جواب صحیح :</span><input type="text" name="valid" value="{{$questions[$i]->valid - $questions[$i]->option[0]->id +1 }}"
                                                    placeholder="برای مثال  3" required><br><br>
                     <span>سطح سوال :</span>
                     <select name="level">

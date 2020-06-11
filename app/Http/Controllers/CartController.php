@@ -58,4 +58,12 @@ class CartController extends Controller
         }
         return redirect('exams');
     }
+    public function removeItem(Request $request, $id){
+        $question = Question::findOrFail($id);
+        $oldCart = \Illuminate\Support\Facades\Session::has('cart') ? \Illuminate\Support\Facades\Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->remove($question, $question->id);
+        $request->session()->put('cart', $cart);
+        return back();
+    }
 }

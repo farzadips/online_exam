@@ -69,12 +69,25 @@
                     <!-- Notifications: style can be found in dropdown.less -->
                     <!-- Tasks: style can be found in dropdown.less -->
                     <!-- User Account: style can be found in dropdown.less -->
+
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <img src="/images/logo2.png" class="user-image" alt="User Image">
                             <span class="hidden-xs">آزمون آنلاین</span>
                         </a>
 
+                    </li>
+
+                    <li class="dropdown user user-menu">
+
+                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+                        <!-- The form -->
+                        <form action="search">
+                            @csrf
+                            <input type="text" placeholder="Search.." name="text">
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                        </form>
                     </li>
                 </ul>
             </div>
@@ -145,16 +158,12 @@
                     </ul>
                 </li>
                 <li class="treeview">
-                    <a href="#">
+                    <a href="{{route('cart.show')}}">
                         <i class="fa fa-pie-chart"></i>
                         <span>سبد سوالات</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
-                    <ul class="treeview-menu">
-                        <li><a href="{{route('cart.show')}}"><i class="fa fa-folder-o"></i>لیست دسته بندی ها </a>
-                        </li>
 
-                    </ul>
                 </li>
                 <li class="treeview">
                     <a href="#">

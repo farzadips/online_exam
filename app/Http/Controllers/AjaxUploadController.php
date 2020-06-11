@@ -37,6 +37,12 @@ class AjaxUploadController extends Controller
             }
 
         }
+        $option_count = $question->exam->option_count;
+
+        $last_option_id = Option::all()->last()->id;
+        $last_question = Question::all()->last() ;
+        $last_question->valid =  $last_option_id - ($option_count - $request->valid);
+        $last_question->save();
 
         return response()->json([
             ['success' => 'با موفقیت انجام شد']
