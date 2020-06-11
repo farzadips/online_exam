@@ -55,15 +55,17 @@
                     <br>
                     <input readonly type="hidden" name="exam_id" value="{{$questions[$i]->exam_id}}">
 
-                    @for($j = $i * $exam->option_count ;$j < ($i+1)*$exam->option_count ;$j++)
-                        <span> </span><input readonly class="w-200" type="text"
-                                             value="{{$options[$j]->option}}"
-                                             name="option[]">
+                    @foreach($questions[$i]->option as $option)
+
+                        <span>- </span><input readonly class="w-200" type="text" value="{{$option->option}}"
+                                              name="option[]"><input readonly
+                                                                     type="file"
+                                                                     name="select_file[]">
                         <br>
                         <br>
                         <br><br>
                         <br>
-                    @endfor
+                    @endforeach
 
                     <br>
                     <br><br>
