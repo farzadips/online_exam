@@ -238,6 +238,10 @@ class ExamController extends Controller
             $op->option = $request->option[$i];
             $op->save();
         }
+        $option_count = $question->exam->option_count;
+        $last_option_id = $question->option[sizeof($question->option)-1]->id;
+        $question->valid =  $last_option_id - ($option_count - $request->valid);
+        $question->save();
 //        ------------------------------------------
         $exam = Exam::findOrFail($question->exam_id);
         $questions = Question::with('exam')
@@ -308,5 +312,12 @@ class ExamController extends Controller
         $options = Option::with('question')->whereIn('question_id', $countArray)->get();
         return PDF::loadView('adminpanel.exams.show_questions_download', compact('exam', 'questions', 'options'), [], 'UTF-8')
             ->download("questions_for_exam_$id.pdf");
+    }
+
+    public function search(Request $request)
+    {
+        $exams = Exam::all();
+        $searched_text = $request->text;
+        return view('adminpanel.search.searchexams',compact(['exams','searched_text']));
     }
 }

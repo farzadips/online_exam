@@ -39,6 +39,7 @@ Route::prefix('adminpanel')->group(function (){
     Route::get('/add-question-to-cart/{id}', 'CartController@addToCart')->name('cart.add');
     Route::get('show_cart','CartController@showCart')->name('cart.show');
     Route::post('/save_cart','CartController@saveCart')->name('cart.save');
+    Route::post('/remove-item/{id}', 'CartController@removeItem')->name('cart.remove');
 
 });
 
@@ -79,3 +80,5 @@ Route::post('/changeuserinfo','UserController@changeuserinfo');
 
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/search', 'ExamController@search')->name('search');
