@@ -11,26 +11,30 @@ use App\Student_Answer;
 use Verta;
 use DateTime;
 use DateTimeZone;
+
 class AnswerController extends Controller
 {
 
-    public function answersubmit(Request $req){
-//        return $req;
-    	 $user=Auth::user();
-         $user_exam=$user->user_exam->where('exam_id', $req->exam_id)->first();
-         $exam=$user_exam->exam;
-         if(Student_Answer::where('user_exam_id', $user_exam->id)->first()==null){
-         for ($i=0; $i <$exam->question_count ; $i++) {
-         	$obj='question'.$i;
-         	if ($req->$obj != null) {
-         		Student_Answer::create(['user_exam_id'=>$user_exam->id,'option_id'=>$req->$obj]);
-
-         	}
-         }
-         return view('success');
-         }else{
+    public function answersubmit(Request $req)
+    {
+        $user = Auth::user();
+        $user_exam = $user->user_exam->where('exam_id', $req->exam_id)->first();
+        $exam = $user_exam->exam;
+        if (Student_Answer::where('user_exam_id', $user_exam->id)->first() == null) {
+            for ($i = 0; $i < $exam->question_count; $i++) {
+                $obj = 'question' . $i;
+                if ($req->$obj != null) {
+                    if ($exam->type_question == 0) {
+                        Student_Answer::create(['user_exam_id' => $user_exam->id, 'option_id' => $req->$obj]);
+                    } else {
+                        Student_Answer::create(['user_exam_id' => $user_exam->id, 'answer' => $req->$obj]);
+                    }
+                }
+            }
             return view('success');
-         }
+        } else {
+            return view('success');
+        }
     }
     public function estimate(Request $req){
         $user=Auth::user();
