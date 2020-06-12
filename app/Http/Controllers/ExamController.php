@@ -120,6 +120,7 @@ class ExamController extends Controller
 
         $options = Option::with('question')
             ->whereIn('question_id', $counarray)->get();
+
         return view('adminpanel.exams.show_questions', compact(['exam', 'questions', 'options']));
     }
 
@@ -219,49 +220,57 @@ class ExamController extends Controller
 
     public function submit_question_edit(Request $request, $id)
     {
+//        dd($request);
         $question = Question::findOrFail($id);
-
         $question->valid = $request->valid;
         $question->level = $request->level;
         $question->question = $request->question;
-
-        $last_option_id = Option::with('question')->where('question_id', $id)->get();
-        $option_count = Exam::with('question')->first()->option_count;
-        $question->valid = $last_option_id[sizeof($last_option_id) - 1]->id - ($option_count - $request->valid);
         $question->save();
+        if ($question->exam->type_question == 0) {
+            $last_option_id = Option::with('question')->where('question_id', $id)->get();
+            $option_count = Exam::with('question')->first()->option_count;
+            $question->valid = $last_option_id[sizeof($last_option_id) - 1]->id - ($option_count - $request->valid);
+            $question->save();
 
-        $options = Option::with('question')->where('question_id', $id)->get();
+            $options = Option::with('question')->where('question_id', $id)->get();
 
-        for ($i = 0; $i < sizeof($request->option); $i++) {
-            $op_id = $options[$i]->id;
-            $op = Option::findOrFail($op_id);
-            $op->option = $request->option[$i];
-            $op->save();
-        }
-        $option_count = $question->exam->option_count;
-        $last_option_id = $question->option[sizeof($question->option)-1]->id;
-        $question->valid =  $last_option_id - ($option_count - $request->valid);
-        $question->save();
+            for ($i = 0; $i < sizeof($request->option); $i++) {
+                $op_id = $options[$i]->id;
+                $op = Option::findOrFail($op_id);
+                $op->option = $request->option[$i];
+                $op->save();
+            }
+            $option_count = $question->exam->option_count;
+            $last_option_id = $question->option[sizeof($question->option) - 1]->id;
+            $question->valid = $last_option_id - ($option_count - $request->valid);
+            $question->save();
 //        ------------------------------------------
-        $exam = Exam::findOrFail($question->exam_id);
-        $questions = Question::with('exam')
-            ->where('exam_id', $exam->id)->get();
+            $exam = Exam::findOrFail($question->exam_id);
+            $questions = Question::with('exam')
+                ->where('exam_id', $exam->id)->get();
 
-        $counarray [] = [];
-        for ($i = 0; $i < sizeof($questions); $i++) {
-            $counarray[$i] = $questions[$i]->id;
+            $counarray [] = [];
+            for ($i = 0; $i < sizeof($questions); $i++) {
+                $counarray[$i] = $questions[$i]->id;
+            }
+
+            $options = Option::with('question')
+                ->whereIn('question_id', $counarray)->get();
+
+            return view('adminpanel.options.editquestions', compact(['exam', 'questions', 'options', 'counarray']));
+        }else{
+            $exam = Exam::findOrFail($question->exam_id);
+            $questions = Question::with('exam')
+                ->where('exam_id', $exam->id)->get();
+            return view('adminpanel.options.editquestions', compact(['exam', 'questions']));
+
         }
-
-        $options = Option::with('question')
-            ->whereIn('question_id', $counarray)->get();
-
-        return view('adminpanel.options.editquestions', compact(['exam', 'questions', 'options', 'counarray']));
-
     }
 
     public function update(Request $request, $id)
     {
         $exam = Exam::findOrFail($id);
+
         $category = Category::findOrFail($id);
 
 

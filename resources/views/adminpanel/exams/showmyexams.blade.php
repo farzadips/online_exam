@@ -20,8 +20,8 @@
                     <table class="table no-margin">
                         <thead>
                         <tr style="direction: rtl">
-                            <th class="text-center">شناسه</th>
                             <th class="text-center"> نام سوال</th>
+                            <th class="text-center"> نوع سوال</th>
                             <th class="text-center"> دسته بندی سوال</th>
 
                         </tr>
@@ -30,8 +30,9 @@
                         @foreach($exams as $exam)
                             @if($exam->author_id == $user->id)
                                 <tr style="direction: rtl">
-                                    <td style="text-align: center">{{$exam->id}}</td>
                                     <td style="text-align: center">{{$exam->exam_name}}</td>
+                                    <td style="text-align: center">{{$exam->type_question == 0 ? $exam->question_count.' گزینه ای' : 'جای خالی'}}</td>
+
                                     <td style="text-align: center">{{isset($exam->category->name) ? $exam->category->name : 'دسته بندی ندارد' }}</td>
 
                                     <td class="text-center">
