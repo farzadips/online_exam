@@ -18,7 +18,9 @@ class CreateStudentAnswersTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('user_exam_id')->unsigned();
             $table->foreign('user_exam_id')->references('id')->on('user__exams')->onDelete('cascade');;
-            $table->bigInteger('option_id')->unsigned();
+            $table->bigInteger('option_id')->unsigned()->nullable();
+            $table->string('answer`',60)->nullable();
+
             $table->foreign('option_id')->references('id')->on('options')->onDelete('cascade');;
             $table->timestamps();
         });
